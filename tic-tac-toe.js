@@ -2,9 +2,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const squares = document.querySelectorAll("#board div");
     const status = document.querySelector("#status");
+    const newGameButton = document.querySelector(".btn");
 
     let currentPlayer = "X";
     let gameOver = false;
+
+    const initialMessage =
+        "Move your mouse over a square and click to play an X or an O.";
 
     const winningCombinations = [
         [0, 1, 2],
@@ -65,4 +69,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return null;
     }
+
+    newGameButton.addEventListener("click", function () {
+        squares.forEach(function (square) {
+            square.textContent = "";
+            square.classList.remove("X", "O", "hover");
+        });
+
+        currentPlayer = "X";
+        gameOver = false;
+
+        status.textContent = initialMessage;
+        status.classList.remove("you-won");
+    });
 });
